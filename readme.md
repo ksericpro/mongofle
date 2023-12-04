@@ -30,6 +30,10 @@ Now you have two keys! One is the 96 random bytes you generated with token_bytes
 envelope encryption
 . The key that is actually used to encrypt field values is stored in the database, but it is stored encrypted with the master key you generated.
 
+# Running Create Master Key, Schema, Data Key with hashicorp and schema into db
+
+python create_key.py -v=hashicorp -s=db
+
 # Hashicorp
 
 ## references
@@ -47,9 +51,6 @@ Windows: set VAULT_ADDR=http://127.0.0.1:8200
 
 ## start hashicorp development
 vault server -dev
-vault token create
-
-vault secrets enable -path=kv kv
 
 ## start hashicorp production
 

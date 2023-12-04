@@ -5,11 +5,15 @@ KEYSTORE_COLLECTION = "__keystore"
 PERSON_COLLECTION = "person"
 SCHEMAS_COLLECTION = "__schemas"
 
-# keys
+# Hashicorp keys
 MASTER_KEY = "key_bytes.bin"
 JSON_SCHEMA = "json_schema.json"
+VAULT_MODE = "file"
 
 JSON_SCHEMA_MODE = "db"
+ENCODING = 'unicode_escape'
+SECRETS_PATH = 'mongofle'
+ROOT_TOKEN ='hvs.fecklRjMDsP0GiflYKmpaONJ'
 
 # logs
 LOG_FOLDER = "logs"

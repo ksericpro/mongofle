@@ -1,42 +1,33 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
+# Hashicorp Example.py
+# Author = Eric See
+# Date = 4/12/2023
 # https://hvac.readthedocs.io/en/stable/overview.html
 
 import hvac
 import sys
+from secrets import token_bytes
+import json
+from config import local as _config
+import os
+import vault_mgr
 
-token='hvs.fecklRjMDsP0GiflYKmpaONJ'
-   
+server = os.environ.get('VAULT_ADDR')
+print('server={}'.format(server))
 
-# Authentication
-client = hvac.Client(
-    url='http://127.0.0.1:8200',
-    token=token,
-)
+_vaultmgr = vault_mgr.VaultMgr(server, _config.ROOT_TOKEN)
+print("Step 1> Connect to Vault")
+_vaultmgr.connect_vault()
 
-# Info
-print("Step 1> Print Info")
-print("\tis authenticated=", client.is_authenticated())
-print("\tis sealed=", client.sys.is_sealed())
-
-#vault kv get -mount=kv-v2 hello
-
-#print(read_secret_from_vault("hello", token, "foo"))
-
-# Writing a secret
-print("Step 2> Write foo=world to 'secret' Secret Engine ")
-create_response = client.secrets.kv.v2.create_or_update_secret(
-    path='foo',
-    secret=dict(baz='world'),
-)
-
-print('\tSecret written successfully.')
+print("Step 2> Write FLE master key 'secret' Secret Engine ")
+# Convert the bytes object back to a string
+print("Generate Master Key")
+key_bytes = token_bytes(96)
+print(type(key_bytes), key_bytes)
+decoded_string = key_bytes.decode(_config.ENCODING)
+create_response = _vaultmgr.write_secret_to_vault(_config.SECRETS_PATH, 'master', decoded_string)
 
 # Reading a secret
 print("Step 3> Read foo from 'secret' Secret Engine ")
-read_response = client.secrets.kv.read_secret_version(path='foo', raise_on_deleted_version=True)
-
-print("\t",read_response)
-password = read_response['data']['data']['baz']
-print("\tpassword={0}".format(password))
+read_response = _vaultmgr.read_secret_from_vault(_config.SECRETS_PATH, 'master')
+b = bytes(read_response, _config.ENCODING)
+print("\tpassword={0}".format(b))
