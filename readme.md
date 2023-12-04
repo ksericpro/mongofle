@@ -34,6 +34,10 @@ envelope encryption
 
 python create_key.py -v=hashicorp -s=db
 
+# Running INference
+
+python fle_main.py -v=hashicorp -s=db
+
 # Hashicorp
 
 ## references
@@ -43,6 +47,7 @@ python create_key.py -v=hashicorp -s=db
 [setup] (https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-deploy)
 [kms] (https://docs.yugabyte.com/preview/yugabyte-platform/security/create-kms-config/hashicorp-kms/)
 [kms2] (https://blog.gitguardian.com/how-to-handle-secrets-in-python/)
+[vault-docker] (https://gist.github.com/Mishco/b47b341f852c5934cf736870f0b5da81)
 
 ## set enviroment
 Linux: export VAULT_ADDR=http://127.0.0.1:8200
@@ -150,7 +155,7 @@ identity_policies    []
 policies             ["trx"]
 
 
-## CRUD using commands
+## CRUD using Vault commands
 
 ### Enable kv v2
 vault secrets enable -version=2 secret
@@ -178,3 +183,7 @@ del ./vault/data
 
 ## seal
 vault operator seal
+
+##  settting vault on docker
+docker-compose -f docker-compose.dev.yml up
+docker-compose -f docker-compose.server.yml up

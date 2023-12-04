@@ -1,3 +1,7 @@
+# File = local.py
+# Author = Eric Ses
+# Date = 4/12/2023
+
 # mongo
 MONGO_URI = "mongodb://root:ultraman@127.0.0.1:27017/admin"
 APP_DB = "fle_demo"
@@ -11,8 +15,8 @@ JSON_SCHEMA = "json_schema.json"
 VAULT_MODE = "file"
 
 JSON_SCHEMA_MODE = "db"
-ENCODING = 'unicode_escape'
 SECRETS_PATH = 'mongofle'
+SECRETS_MASTER = "master"
 ROOT_TOKEN ='hvs.fecklRjMDsP0GiflYKmpaONJ'
 
 # logs

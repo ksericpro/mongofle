@@ -1,3 +1,7 @@
+# File = fle_main.py
+# Author = Eric Ses
+# Date = 4/12/2023
+
 import argparse, os
 from pathlib import Path
 
@@ -33,17 +37,20 @@ if __name__ == '__main__':
       print("Step 1> Connect to Vault")
       _vaultmgr.connect_vault()
 
-      # Reading a secret
+     # Reading a secret
       print("Step 2> Read foo from 'secret' Secret Engine ")
-      read_response = _vaultmgr.read_secret_from_vault(_config.SECRETS_PATH, 'master')
-      key_bin = bytes(read_response, _config.ENCODING)
-      print("\tpassword={0}".format(key_bin))
-            
+      read_response = _vaultmgr.read_secret_from_vault(_config.SECRETS_PATH, _config.SECRETS_MASTER)
 
+      print("\treading hex_string=",read_response, type(read_response))
+      key_bin = bytes.fromhex(read_response)
+      print("\tconvert bytes=",key_bin)
+      print("\master key={}".format(key_bin))
+      print("\tlength={}".format(len(key_bin)))
+            
    # Load the 'person' schema from "json_schema.json":
    print("Step 2>loading schema")
 
-   if _config.JSON_SCHEMA_MODE != "db":
+   if schema_mode != "db":
       print("from file")
       collection_schema = json_util.loads(Path(_config.JSON_SCHEMA).read_text())
    else:

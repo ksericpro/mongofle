@@ -1,4 +1,4 @@
-# Hashicorp create_key.py
+# File = create_key.py
 # Author = Eric Ses
 # Date = 4/12/2023
 
@@ -68,10 +68,12 @@ if __name__ == '__main__':
       print("Step 2> Write FLE master key 'secret' Secret Engine ")
       # Convert the bytes object back to a string
       print("Generate Master Key")
-      key_bytes = token_bytes(96)
       print(type(key_bytes), key_bytes)
-      decoded_string = key_bytes.decode(_config.ENCODING)
-      create_response = _vaultmgr.write_secret_to_vault(_config.SECRETS_PATH, 'master', decoded_string)
+      print("\tlength={}".format(len(key_bytes)))
+      hex_string = bytes(key_bytes).hex()
+      print("\twriting hex_string=",hex_string)
+
+      create_response = _vaultmgr.write_secret_to_vault(_config.SECRETS_PATH, _config.SECRETS_MASTER, hex_string)
 
 
    schema = {
