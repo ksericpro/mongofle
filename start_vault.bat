@@ -1,1 +1,1 @@
-vault server -config=config.hcl
+vault server -config=config/config.hcl

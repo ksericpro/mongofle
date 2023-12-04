@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  vault-filesystem:
+    build:
+      context: ./
+      dockerfile: ./docker/dockefiles/vault/Dockerfile
+    container_name: vault_server
+    ports:
+      - 8200:8200
+    environment:
+      - VAULT_ADDR=http://127.0.0.1:8200
+      - VAULT_API_ADDR=http://127.0.0.1:8200
+    volumes:
+      - vault-volume:D:/projects/pyprojects/mongofle/docker/data
+    command: server -config=/vault/config/vault-config.json
+    cap_add:
+      - IPC_LOCK
+    restart: on-failure:10
+    networks:
+      - sk_cloud
+
+volumes:
+  vault-volume:
+    driver: local
+
+networks:
+  sk_cloud:

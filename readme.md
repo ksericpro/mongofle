@@ -48,6 +48,7 @@ python fle_main.py -v=hashicorp -s=db
 [kms] (https://docs.yugabyte.com/preview/yugabyte-platform/security/create-kms-config/hashicorp-kms/)
 [kms2] (https://blog.gitguardian.com/how-to-handle-secrets-in-python/)
 [vault-docker] (https://gist.github.com/Mishco/b47b341f852c5934cf736870f0b5da81)
+[mounting in docker] (https://ioflood.com/blog/docker-compose-volumes-how-to-mount-volumes-in-docker/#:~:text=First%2C%20define%20your%20volume%20in,%3A%2Fpath%2Fin%2Fcontainer%20.)
 
 ## set enviroment
 Linux: export VAULT_ADDR=http://127.0.0.1:8200
@@ -66,27 +67,7 @@ mkdir -p ./vault/data
 Set the -config flag to point to the proper path where you saved the configuration above.
 
 ### command to start
-vault server -config=config.hcl
-
-### login
-vault login
-
-hvs.fecklRjMDsP0GiflYKmpaONJ
-
-## enable secrets and path kv
-vault secrets enable -version=2 kv-v2
-
-## Checking
-vault secrets list
-
-Path          Type         Accessor              Description
-----          ----         --------              -----------
-cubbyhole/    cubbyhole    cubbyhole_ccc8f7af    per-token private secret storage
-identity/     identity     identity_88c3b40a     identity store
-kv-v2/        kv           kv_7a040a2a           n/a
-secret/       kv           kv_a4995332           n/a
-sys/          system       system_30fcbb8e       system endpoints used for control, policy and debugging
-
+vault server -config=config/onfig.hcl
 
 ## initialize vault
 vault operator init
@@ -115,6 +96,26 @@ HA Mode                 standby
 Active Node Address     <none>
 Raft Committed Index    31
 Raft Applied Index      31
+
+### login
+vault login
+
+hvs.fecklRjMDsP0GiflYKmpaONJ
+
+## enable secrets and path kv
+vault secrets enable -version=2 kv-v2
+
+## Checking
+vault secrets list
+
+Path          Type         Accessor              Description
+----          ----         --------              -----------
+cubbyhole/    cubbyhole    cubbyhole_ccc8f7af    per-token private secret storage
+identity/     identity     identity_88c3b40a     identity store
+kv-v2/        kv           kv_7a040a2a           n/a
+secret/       kv           kv_a4995332           n/a
+sys/          system       system_30fcbb8e       system endpoints used for control, policy and debugging
+
 
 ## login
 

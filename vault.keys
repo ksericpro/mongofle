@@ -1,3 +1,4 @@
+[main]
 Unseal Key 1: sbiSTzfj8I9kZ8tH+8bZ6Ta6CeU3lZ2Ay4NScw3QNZ7o
 Unseal Key 2: EzS6T1g+P/N5J9333ChDeMXJDtpl/ewdsBXXSZxB6bNI
 Unseal Key 3: x3kCDsAmJmusYQqRG+kWNNEKPwcy8e9LiH5vGxID0vCz
@@ -5,3 +6,13 @@ Unseal Key 4: 6Pf/gBtI31wax78Gz4Q6lgrjRBs5Cx+eU9KckV/zf77m
 Unseal Key 5: hwJFY5ev98pEBk8KCBIha8LoySi+P2pxFDvYGm3Xvcfg
 
 Initial Root Token: hvs.fecklRjMDsP0GiflYKmpaONJ
+
+
+[docker]
+Unseal Key 1: 5DRIPxIJ1aHVIgBufwe6N78hBV1/R+PU/5Sl58U5f5hr
+Unseal Key 2: X2b/lWee0jK4WjZvIniQgG3ewxQsuUz/uMJk7nz4GWT/
+Unseal Key 3: HVNpOi1EtJsVr+59jhErMfhLtapPZ/BgYUR6bKlPvrsS
+Unseal Key 4: Ivh2ZTHkPJ1Un9AR8O3x9jlEzhKGQj2AVJ1uTV/8fr+b
+Unseal Key 5: fZ1gFiY7FjmPmiJg4LQ+MysWAMCIwwZmJJ48mXLdPooY
+
+Initial Root Token: hvs.EQcinx3rlTQ3qaX1NIZqs5B4
