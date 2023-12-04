@@ -38,28 +38,52 @@ envelope encryption
 [example] (https://developer.hashicorp.com/vault/docs/get-started/developer-qs)
 [setup] (https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-deploy)
 [kms] (https://docs.yugabyte.com/preview/yugabyte-platform/security/create-kms-config/hashicorp-kms/)
+[kms2] (https://blog.gitguardian.com/how-to-handle-secrets-in-python/)
 
-## development
-vault server -dev
-vault token create
-
-vault secrets list
-vault secrets enable -path=kv kv
-
-## setup
-The ./vault/data directory that raft storage backend uses must exist.
-mkdir -p ./vault/data
-
-Set the -config flag to point to the proper path where you saved the configuration above.
-vault server -config=config.hcl
-
-## initialize vault
+## set enviroment
 Linux: export VAULT_ADDR=http://127.0.0.1:8200
 or
 Windows: set VAULT_ADDR=http://127.0.0.1:8200
 
-vault operator init
+## start hashicorp development
+vault server -dev
+vault token create
 
+vault secrets enable -path=kv kv
+
+## start hashicorp production
+
+### setup
+The ./vault/data directory that raft storage backend uses must exist.
+mkdir -p ./vault/data
+
+Set the -config flag to point to the proper path where you saved the configuration above.
+
+### command to start
+vault server -config=config.hcl
+
+### login
+vault login
+
+hvs.fecklRjMDsP0GiflYKmpaONJ
+
+## enable secrets and path kv
+vault secrets enable -version=2 kv-v2
+
+## Checking
+vault secrets list
+
+Path          Type         Accessor              Description
+----          ----         --------              -----------
+cubbyhole/    cubbyhole    cubbyhole_ccc8f7af    per-token private secret storage
+identity/     identity     identity_88c3b40a     identity store
+kv-v2/        kv           kv_7a040a2a           n/a
+secret/       kv           kv_a4995332           n/a
+sys/          system       system_30fcbb8e       system endpoints used for control, policy and debugging
+
+
+## initialize vault
+vault operator init
 
 ## unseal
 vault operator unseal
@@ -107,8 +131,6 @@ http://localhost:8200
 
 login via token
 
-## enable secrets
-vault secrets enable transit
 
 ## create token for access
 vault token create -no-default-policy -policy=trx
@@ -125,6 +147,24 @@ token_renewable      true
 token_policies       ["trx"]
 identity_policies    []
 policies             ["trx"]
+
+
+## CRUD using commands
+
+### Enable kv v2
+vault secrets enable -version=2 secret
+
+### Create
+vault kv put secret/hello foo1=world1
+
+#### read
+vault kv get -mount=secret hello
+vault kv get -mount=secret -field=foo1 hello
+vault kv get -mount=secret -format=json hello | jq -r .data.data.baz
+
+### delete
+vault kv delete -mount=secret hello
+vault kv get -mount=secret hello
 
 ## Clean up
 Linux:  

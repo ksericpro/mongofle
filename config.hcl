@@ -34,3 +34,7 @@ path "auth/token/renew-self" {
 path "sys/*" {
         capabilities = ["read"]
 }
+
+path "sys/mounts" {
+        capabilities = ["read"]
+}
