@@ -17,7 +17,10 @@ VAULT_MODE = "file"
 JSON_SCHEMA_MODE = "db"
 SECRETS_PATH = 'mongofle'
 SECRETS_MASTER = "master"
-ROOT_TOKEN ='hvs.fecklRjMDsP0GiflYKmpaONJ'
+NORMAL_ROOT_TOKEN ='hvs.fecklRjMDsP0GiflYKmpaONJ'
+DOCKER_ROOT_TOKEN = 'hvs.WlVVvB3L2HrGIZvzMhneJTF8'
+
+TOKEN = DOCKER_ROOT_TOKEN
 
 # logs
 LOG_FOLDER = "logs"

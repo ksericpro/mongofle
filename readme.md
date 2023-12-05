@@ -50,27 +50,32 @@ python fle_main.py -v=hashicorp -s=db
 [vault-docker] (https://gist.github.com/Mishco/b47b341f852c5934cf736870f0b5da81)
 [mounting in docker] (https://ioflood.com/blog/docker-compose-volumes-how-to-mount-volumes-in-docker/#:~:text=First%2C%20define%20your%20volume%20in,%3A%2Fpath%2Fin%2Fcontainer%20.)
 
-## set enviroment
+##  settting vault on docker
+docker-compose up
+
+### set enviroment
 Linux: export VAULT_ADDR=http://127.0.0.1:8200
 or
 Windows: set VAULT_ADDR=http://127.0.0.1:8200
 
-## start hashicorp development
-vault server -dev
+OR
 
-## start hashicorp production
-
-### setup
+## setup
 The ./vault/data directory that raft storage backend uses must exist.
 mkdir -p ./vault/data
 
 Set the -config flag to point to the proper path where you saved the configuration above.
 
 ### command to start
-vault server -config=config/onfig.hcl
+vault server -config=vault/config/config.hcl
+
+
+## init
 
 ## initialize vault
 vault operator init
+
+copy down the seal and root token
 
 ## unseal
 vault operator unseal
@@ -103,7 +108,7 @@ vault login
 hvs.fecklRjMDsP0GiflYKmpaONJ
 
 ## enable secrets and path kv
-vault secrets enable -version=2 kv-v2
+vault secrets enable kv-v2
 
 ## Checking
 vault secrets list
@@ -159,7 +164,7 @@ policies             ["trx"]
 ## CRUD using Vault commands
 
 ### Enable kv v2
-vault secrets enable -version=2 secret
+vault secrets enable secret
 
 ### Create
 vault kv put secret/hello foo1=world1
@@ -184,7 +189,3 @@ del ./vault/data
 
 ## seal
 vault operator seal
-
-##  settting vault on docker
-docker-compose -f docker-compose.dev.yml up
-docker-compose -f docker-compose.server.yml up

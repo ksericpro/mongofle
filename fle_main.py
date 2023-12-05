@@ -33,7 +33,7 @@ if __name__ == '__main__':
       server = os.environ.get('VAULT_ADDR')
       print('server={}'.format(server))
 
-      _vaultmgr = vault_mgr.VaultMgr(server, _config.ROOT_TOKEN)
+      _vaultmgr = vault_mgr.VaultMgr(server, _config.TOKEN)
       print("Step 1> Connect to Vault")
       _vaultmgr.connect_vault()
 

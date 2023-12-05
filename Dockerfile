@@ -24,7 +24,7 @@ RUN wget --quiet --output-document=/tmp/vault.zip https://releases.hashicorp.com
 ENV PATH="PATH=$PATH:$PWD/vault"
 
 # add the config file
-COPY ./docker/dockerfiles/vault/config/vault-config.json /vault/config/vault-config.json
+COPY ./docker/config/vault-config.json /vault/config/vault-config.json
 
 # expose port 8200
 EXPOSE 8200

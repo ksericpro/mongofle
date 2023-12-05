@@ -1,3 +1,5 @@
+boto3==1.33.6
+botocore==1.33.6
 bson==0.5.10
 certifi==2023.7.22
 cffi==1.16.0
@@ -6,11 +8,13 @@ cryptography==41.0.5
 dnspython==2.4.2
 hvac==2.0.0
 idna==3.4
+jmespath==1.0.1
 packaging==23.2
 pycparser==2.21
 pymongo==3.13.0
 pymongocrypt==1.7.0
 python-dateutil==2.8.2
 requests==2.31.0
+s3transfer==0.8.2
 six==1.16.0
 urllib3==2.0.7
