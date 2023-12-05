@@ -9,7 +9,7 @@ python -m pip install "pymongo[encryption,srv]~=3.11"
 The second thing you'll need to have installed is mongocryptd, which is an application that is provided as part of 
 MongoDB Enterprise.
 
-pip -m venv .env/mongofle
+python -m venv .env/mongofle
 cd .env/mongofle
 cd Scripts 
 activate
