@@ -15,7 +15,7 @@ import vault_mgr
 
 if __name__ == '__main__':
 
-    # Get Arguments
+   # Get Arguments
    parser = argparse.ArgumentParser()
    parser.add_argument("-v", "--vault", default=_config.VAULT_MODE)
    parser.add_argument("-s", "--schema", default=_config.JSON_SCHEMA_MODE)
