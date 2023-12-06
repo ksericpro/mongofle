@@ -15,7 +15,7 @@ python -m venv .env/mongofle
 cd .env/mongofle
 cd Scripts 
 activate
-pip -r install requirements.txt
+pip install -r requirements.txt
 
 # master key
 
