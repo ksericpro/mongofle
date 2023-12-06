@@ -55,6 +55,8 @@ python fle_main.py -v=hashicorp -s=db
 ##  settting vault on docker
 docker-compose up
 
+docker exec -it vault_server bash
+
 ### set enviroment
 Linux: export VAULT_ADDR=http://127.0.0.1:8200
 or
